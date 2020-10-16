@@ -1,0 +1,1249 @@
+{
+	"info": {
+		"_postman_id": "af59eb2e-0998-4017-bc36-ad0f62410761",
+		"name": "Beyonic - Ruth Waiharo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Collection Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a814751-daca-4072-b5a3-410c06029fc6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"phonenumber\": \"+80000000001\",\n\t\"amount\": \"1200\",\n\t\"currency\": \"BXC\",\n\t\"description\": \"Per diem\",\n\t\"callback_url\": \"https://my.website/payments/callback\",\n\t\"metadata\": {\"my_id\": \"123ASDAsd123\"},\n\t\"send_instructions\": \"True\"\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/collectionrequests",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collectionrequests"
+					]
+				},
+				"description": "Collection Requests allow you to notify a customer to send funds to you. When you create a collection request, we send a notification to the customer, with insructions on how to fulfill the request. When they send the funds, a collection object shall be created, and matched with the collection request."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Collection Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "263c29bf-e296-4d60-86d6-79de33d2ef00",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/collectionrequests/{{collection_request_id}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collectionrequests",
+						"{{collection_request_id}}"
+					]
+				},
+				"description": "Retrieve a single collection request. The id is retrieved from the environment in the creat collection request call. But you can also set it manually"
+			},
+			"response": []
+		},
+		{
+			"name": "List Collection Requests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0752cb8-462f-4739-96b9-4d74d5ebdc96",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is an empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/collectionrequests",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collectionrequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FIlter Collection Requests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1cc9ba09-1244-41f2-9323-775ad1d3be97",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/collectionrequests?currency=BXC&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collectionrequests"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "BXC"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Collections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8d877bf-58fc-4ed0-a3bc-7490ce7738f7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is an empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/collections",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Single Collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "53322418-af17-4000-9b5b-4edda12ff353",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/collections/{{collection_id}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collections",
+						"{{collection_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Collections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "086b136f-e8d7-45eb-8a34-21bf7f622979",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/collections?currency=BXC&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"collections"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "BXC"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5414a593-629f-4cdc-87fe-96ee13d3fa2d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"phonenumber\": \"+80000000001\",\n\t\"first_name\": \"Kennedy\",\n\t\"last_name\": \"Amani\",\n\t\"currency\": \"BXC\",\n\t\"amount\": \"30\",\n\t\"description\": \"Per diem payment\",\n\t\"callback_url\": \"https://my.website/payments/callback\",\n\t\"payment_type\": \"money\"\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/payments",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Single Payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb07e53c-94b1-4007-bbfb-56beda500c63",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/payments/{{payment_id}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"payments",
+						"{{payment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2b2fc17b-631b-4d69-843d-4444cc9746c7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is an empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/payments",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc5756a4-eb67-4fcf-a9d7-704c8525b07c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/payments?currency=BXC&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"payments"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "BXC"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Accounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "46a0f424-7e73-4fd6-9180-9d6fe0907c37",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is non empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/accounts",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Single Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ef92eda-e082-44d2-9d38-b946df9f085d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/accounts/{{account_id}}\t",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"accounts",
+						"{{account_id}}\t"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Accounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4fb00168-fc13-4452-8aec-6e98b9074e15",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/accounts?currency=BXC&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "BXC"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9ad77ea-7b9e-4727-bb83-20b2cb55d55f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is an empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/transactions",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Single Transaction",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79cf7e89-212e-4470-ac2e-f88eada50bcc",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/transactions/{{transaction_id}}\t",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"transactions",
+						"{{transaction_id}}\t"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72535cbd-3695-4caa-b641-ed893efb3716",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/transactions?type=mobile_payment&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "mobile_payment"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "290a9f2d-2f51-4e82-bd35-1b60234145d4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cbfc2294-facd-48de-95ec-8217369063dd",
+						"exec": [
+							"function generate_random_string(string_length){",
+							"    let random_string = '';",
+							"    let random_ascii;",
+							"    for(let i = 0; i < string_length; i++) {",
+							"        random_ascii = Math.floor((Math.random() * 25) + 97);",
+							"        random_string += String.fromCharCode(random_ascii)",
+							"    }",
+							"    return random_string",
+							"}",
+							"// store email",
+							"var email = generate_random_string(5) + \"@\" + generate_random_string(5) + \".com\";",
+							"pm.environment.set(\"email\", email);",
+							"",
+							"function generate_random_number(){",
+							"    let num_low = 80000000002;",
+							"    let num_high = 80099999999;",
+							"    return Math.floor((Math.random() * (num_high - num_low)) + num_low);",
+							"}",
+							"var number = \"+\" + generate_random_number();",
+							"pm.environment.set(\"number\", number);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Doe\",\n\t\"phone_number\": \"{{number}}\",\n\t\"email\": \"{{email}}\",\n\t\"metadata\": {\"my_id\": \"123ASDAsd123\"}\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/contacts",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Single Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62d1ce0e-c8c6-470f-84db-704351cc4204",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/contacts/{{contact_id}}\t",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts",
+						"{{contact_id}}\t"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c63a05f-deea-4c9d-98b9-d74b92f66ba4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is non empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.not.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/contacts",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14f7c695-24e6-4ca0-9e3d-5d72915c67dd",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/contacts?first_name=John&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "John"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "962b1d05-9fff-4075-b11a-b624622f507f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is non empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.not.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/events",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "02640318-23cf-47e4-9542-c8997d60be7c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/events?type=contact.created&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "contact.created"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40979da8-6529-43ca-8002-bf7661225ea8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"event\":\"payment.status.changed\",\n\t\"target\": \"https://my.callback.url/\"\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/webhooks",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"webhooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Single Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1758942-a493-4e13-80ba-125bcc399fcc",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/webhooks/{{webhook_id}}\t",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"webhooks",
+						"{{webhook_id}}\t"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Webhooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "332cb68f-d3d2-4f3d-86bf-3e485a2c2870",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Confirm that results is non empty list\", function() {\r",
+							"   var jsonBody = pm.response.json();\r",
+							"   pm.expect(jsonBody.results.length).to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/webhooks",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"webhooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e676c041-d8fb-4b0f-8110-5e53e34dd21b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"event\":\"payment.status.changed\",\n\t\"target\": \"https://my.callback2.url/\"\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/webhooks/{{webhook_id}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"webhooks",
+						"{{webhook_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0ff40eb-c727-4f82-a1f1-9315ad45d174",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/webhooks/{{webhook_id}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"webhooks",
+						"{{webhook_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Webhooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b4d3b49-500e-4eb5-8602-b65d3140dd0b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/webhooks?event=collection.received&limit=1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"webhooks"
+					],
+					"query": [
+						{
+							"key": "event",
+							"value": "collection.received"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": []
+}
